@@ -39,7 +39,7 @@ const page = async () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((page) => (
+            {data?.map((page) => (
               <tr key={page._id}>
                 <td className="border px-4 py-2">{page.title}</td>
                 <td className="border px-4 py-2">{page.texts.length}</td>
