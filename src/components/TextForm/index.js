@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import FormBtn from "../common/FormBtn";
 import TextFiled from "../common/TextFiled";
