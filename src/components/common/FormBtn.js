@@ -1,9 +1,10 @@
 import React from "react";
 
-const FormBtn = ({ addOnClick }) => {
+const FormBtn = ({ addOnClick, handleSubmit }) => {
   return (
     <div className="flex items-center gap-5">
       <button
+        onClick={handleSubmit}
         className="bg-blue-500 w-36 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         type="button"
       >

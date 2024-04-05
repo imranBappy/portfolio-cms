@@ -4,18 +4,43 @@ import Link from "next/link";
 import TextForm from "@/components/TextForm";
 import ImageForm from "@/components/ImageForm";
 import TextFiled from "@/components/common/TextFiled";
+import { uploadImages } from "@/services";
 
 const CreatePage = () => {
-  const [currentTab, setCurrentTab] = useState("text"); // or image
+  const [currentTab, setCurrentTab] = useState("text"); // or image'
+  const [title, setTitle] = useState("");
+  const [inputList, setInputList] = useState([{ content: "" }]);
+  const [imageList, setImageList] = useState([{ url: "", file: null }]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // console.log({
+    //   title: title,
+    //   inputList,
+    //   imageList,
+    // });
+
+    const urls = await uploadImages(imageList);
+    console.log(urls);
+  };
 
   return (
     <div className="container  mx-auto px-4 py-8 max-w-[800px]">
       <h1 className="text-2xl font-bold">Create Page</h1>
 
       <div className="mt-8">
-        <form>
+        <form
+          className="p-4 shadow-md rounded-md"
+          onSubmit={handleSubmit}
+          method="POST"
+        >
           <div className="mb-4 flex justify-between ">
-            <TextFiled label="Title" placeholder="Enter Title" />
+            <TextFiled
+              label="Title"
+              placeholder="Enter Title"
+              onChange={(e) => setTitle(e.target.value)}
+            />
             <Link href="/dashboard/">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
                 View Page
@@ -47,7 +72,17 @@ const CreatePage = () => {
               Image
             </button>
           </div>
-          {currentTab === "text" ? <TextForm /> : <ImageForm />}
+          {currentTab === "text" ? (
+            <TextForm
+              inputListState={[inputList, setInputList]}
+              handleSubmit={handleSubmit}
+            />
+          ) : (
+            <ImageForm
+              imageListState={[imageList, setImageList]}
+              handleSubmit={handleSubmit}
+            />
+          )}
         </form>
       </div>
     </div>
