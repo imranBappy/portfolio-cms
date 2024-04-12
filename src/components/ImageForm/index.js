@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import FormBtn from "../common/FormBtn";
 import ImageFiled from "../common/ImageFiled";
 
@@ -11,11 +11,11 @@ const ImageForm = ({ imageListState, handleSubmit }) => {
   };
 
   // handle input change
-  const handleInputChange = (e, index) => {
+  const handleInputChange = (index, e) => {
     const { name, files } = e.target;
     let list = [...imageList];
     list[index] = {
-      url: list[index].url,
+      url: "",
       file: files ? files[0] : null,
     };
     setImageList(list);
@@ -24,18 +24,18 @@ const ImageForm = ({ imageListState, handleSubmit }) => {
   return (
     <div>
       <div className="mb-8 ">
-        {imageList.map((x, i) => (
-          <div key={i} className="mb-4">
-            <ImageFiled
-              value={x}
-              name="url"
-              onChange={(e) => handleInputChange(e, i)}
-              label={`Text ${i + 1}`}
-              placeholder={`Enter Text ${i + 1}`}
-              className="w-full"
-            />
-          </div>
-        ))}
+        {imageList.map((x, i) => {
+          return (
+            <div key={i} className="mb-4">
+              <ImageFiled
+                index={i}
+                label="Image"
+                value={x}
+                onChange={(e) => handleInputChange(i, e)}
+              />
+            </div>
+          );
+        })}
       </div>
 
       <FormBtn addOnClick={handleAddInput} handleSubmit={handleSubmit} />

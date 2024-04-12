@@ -3,7 +3,8 @@ import Link from "next/link";
 import { getPages } from "@/services";
 
 const page = async () => {
-  const data = await getPages();
+  const data = (await getPages()) || [];
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className=" p-4 shadow-md rounded-md flex justify-between items-center">
@@ -32,6 +33,7 @@ const page = async () => {
         <table className="table-auto w-full">
           <thead>
             <tr>
+              <th className="px-4 py-2">ID</th>
               <th className="px-4 py-2">Title</th>
               <th className="px-4 py-2">Text Count</th>
               <th className="px-4 py-2">Image Count</th>
@@ -41,11 +43,12 @@ const page = async () => {
           <tbody>
             {data?.map((page) => (
               <tr key={page._id}>
+                <td className="border px-4 py-2">{page._id}</td>
                 <td className="border px-4 py-2">{page.title}</td>
                 <td className="border px-4 py-2">{page.texts.length}</td>
                 <td className="border px-4 py-2">{page.images.length}</td>
                 <td className="border px-4 py-2">
-                  <Link href={`/dashboard/edit/${page._id}`}>Edit</Link>
+                  <Link href={`/dashboard/create?edit=${page._id}`}>Edit</Link>
                 </td>
               </tr>
             ))}

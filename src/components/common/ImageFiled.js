@@ -2,16 +2,19 @@ import Image from "next/image";
 import React from "react";
 const PLACEHOLDER_IMAGE =
   "https://res.cloudinary.com/do5erbtee/image/upload/v1712328264/expopiwxxloczooebc3t.jpg";
+
+
 const ImageFiled = ({
   className = "",
   label = "",
   placeholder = "",
   onChange,
   value = { url: "", file: null },
+  index,
   ...rest
 }) => {
   let src = PLACEHOLDER_IMAGE;
-  if (value.url) {
+  if (value?.url) {
     src = value.url;
   } else {
     if (value.file) {
@@ -41,7 +44,9 @@ const ImageFiled = ({
         transition-all
         duration-300
         "
-        htmlFor="image"
+        htmlFor={
+          `image_${index}`
+        }
       >
         <Image
           src={src}
@@ -69,7 +74,7 @@ const ImageFiled = ({
       <input
         onChange={onChange}
         className="shadow hidden appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="image"
+        id={`image_${index}`}
         type="file"
         accept="image/*"
         placeholder={placeholder}
