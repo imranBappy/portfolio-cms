@@ -29,6 +29,7 @@ export default function Home() {
       >
         {data?.images?.map((image, index) => (
           <Image
+            key={index}
             src={image.url}
             alt="Vercel Logo"
             width={100}
