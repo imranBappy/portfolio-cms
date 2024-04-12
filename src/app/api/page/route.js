@@ -22,7 +22,6 @@ export async function GET(req) {
   try {
     await connectDB();
     const pages = await Page.find();
-    console.log({ pages });
     return Response.json(pages);
   } catch (error) {
     return Response.json({

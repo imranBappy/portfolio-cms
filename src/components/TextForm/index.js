@@ -12,7 +12,6 @@ const TextForm = ({ inputListState, handleSubmit }) => {
   };
 
   const handleInputChange = (e, index) => {
-    console.log(index);
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;

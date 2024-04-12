@@ -1,21 +1,22 @@
 "use client";
 
+import { getPage } from "@/services";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/page/6616746101612682a39b4b10`
-    )
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
+export default async function Home() {
+ 
+  const data = await getPage("6616746101612682a39b4b10");
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <Link href="/dashboard">
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Go to Dashboard
+        </button>
+      </Link>
+
       <div
         className="
         flex flex-row

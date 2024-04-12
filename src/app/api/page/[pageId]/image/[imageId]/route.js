@@ -4,7 +4,6 @@ import Page from "@/models/Page";
 export async function GET(res, { params }) {
   try {
     const { pageId, imageId } = params;
-    console.log({ pageId, imageId });
     await connectDB();
     const page = await Page.findById(pageId, {
       images: {
