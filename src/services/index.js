@@ -18,8 +18,7 @@ export async function createPage(data) {
 export async function getPages() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/page`);
-    const result = await res.json();
-    return result;
+    return res.json();
   } catch (error) {
     console.error(error);
     return null;

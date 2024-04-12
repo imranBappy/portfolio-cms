@@ -1,9 +1,15 @@
-import React from "react";
-import Link from "next/link";
-import { getPages } from "@/services";
+"use client";
 
-const page = async () => {
-  const data = (await getPages()) || [];
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+
+export default function Dashboard() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/page`)
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -57,6 +63,4 @@ const page = async () => {
       </div>
     </div>
   );
-};
-
-export default page;
+}
