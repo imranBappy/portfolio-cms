@@ -46,7 +46,7 @@ export default async function Dashboard() {
                 <td className="border px-4 py-2">{page._id}</td>
                 <td className="border px-4 py-2">{page.title}</td>
                 <td className="border px-4 py-2">{page.texts.length}</td>
-                <td className="border px-4 py-2">{page.images.length}</td>
+                <td className="border px-4 py-2">{page.images?.length || 0}</td>
                 <td className="border px-4 py-2">
                   <Link href={`/dashboard/create?edit=${page._id}`}>Edit</Link>
                 </td>

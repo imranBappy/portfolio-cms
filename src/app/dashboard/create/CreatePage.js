@@ -1,5 +1,5 @@
 "use client";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import TextForm from "@/components/TextForm";
 import ImageForm from "@/components/ImageForm";
@@ -18,10 +18,8 @@ const CreatePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (searchParams.get("edit")) {
       let images = await uploadImages(imageList);
-
       const upRes = await updatePage({
         _id: searchParams.get("edit"),
         title,
@@ -34,7 +32,6 @@ const CreatePage = () => {
       const res = await createPage({ title, texts: inputList, images });
       toast.success(res.message);
     }
-
     router.push("/dashboard");
   };
   useEffect(() => {
@@ -43,7 +40,7 @@ const CreatePage = () => {
       setTitle(res.title);
       if (res.texts) setInputList(res.texts);
       if (res.images) setImageList(res.images);
-      if (res.texts?.length == 0 || res.images.length) setCurrentTab("image");
+      // if (res.texts?.length > 0) setCurrentTab("image");
     });
   }, [searchParams.get("edit")]);
 
